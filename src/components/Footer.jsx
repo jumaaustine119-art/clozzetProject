@@ -9,12 +9,12 @@ import instagram from "../assets/images/instagram.png";
 import facebook from "../assets/images/facebook.png";
 function Footer() {
   return (
-    <div className="bg-gray-100">
+    <div className="#eeeeee">
       <h1 className="text-4xl flex justify-center pt-8 font-normal">
         Subscribe & get up to30% OFF
       </h1>
       <div className="flex gap-8 justify-center pt-8">
-        <div className="border-2 rounded-full w-100 h-15 border-green-300 py-2">
+        <div className="border-2 rounded-full w-100 h-15 border-[#45c9a1] py-2">
           <input
             className="flex-1 border-0 rounded-full py-2 px-8 outline-0"
             type="text"
@@ -23,7 +23,7 @@ function Footer() {
         </div>
         <div>
           <div>
-            <button className="border rounded-full w-48 h-15 text-white bg-green-300">
+            <button className="border rounded-full w-48 h-15 text-white bg-[#45c9a1]">
               Subscribe
             </button>
           </div>

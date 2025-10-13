@@ -6,7 +6,7 @@ function Hero() {
       <div className="flex">
         <div className="w-[50%]">
           <h1 className="text-7xl font-semibold mt-7">
-            Choose the look that <span className="text-green-300">suits</span>{" "}
+            Choose the look that <span className="text-[#45c9a1]">suits</span>{" "}
             you best
           </h1>
           <p className="text-xl font-normal my-7 ">
@@ -16,10 +16,10 @@ function Hero() {
             beautiful.True style never dies.
           </p>
           <div className="flex gap-7">
-            <button className="bg-green-300 rounded-full py-2 px-7 cursor-pointer">
+            <button className="bg-[#45c9a1] rounded-full py-2 px-7 cursor-pointer">
               Shop Now
             </button>
-            <button className="bg-grey-500 text-green-600 rounded-full py-2 px-7 border-1 cursor-pointer ">
+            <button className="bg-grey-500 text-[#45c9a1] rounded-full py-2 px-7 border-1 cursor-pointer ">
               About Us
             </button>
           </div>

@@ -11,28 +11,28 @@ function Cartulties (){
         <Cartulty
           img={mens}
           name="Men's Collection"
-          color="bg-gray-300"
+          color="bg-[#f0efef]"
           gridStyles="col-start-1 col-end-2 row-start-1 row-end-3"
           // triangle={triangle}
         />
         <Cartulty
           img={hbags}
           name="Designer Handbags"
-          color="bg-pink-200"
+          color="bg-[#fff1f1]"
           gridStyles="col-start-1 col-end-2 row-start-3 row-end-4"
           // triangle={triangle}
         />
         <Cartulty
           img={watches}
           name="Luxury Watches"
-          color="bg-green-200"
+          color="bg-[#e3f9fb]"
           gridStyles="col-start-2 col-end-3 row-start-1 row-end-2"
           // triangle={triangle}
         />
         <Cartulty
           img={ladies}
           name="Ladies Collection"
-          color="bg-pink-400"
+          color="bg-[#fedbdb]"
           gridStyles="col-start-2 col-end-3 row-start-2 row-end-4"
           // triangle={triangle}
         />

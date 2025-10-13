@@ -18,12 +18,12 @@ function Market({ img, name, price, heart, cart = [], setCart }) {
   return (
     <div>
       <div>
-        <div className="bg-gray-300 w-[350px] h-[400px] group relative flex justify-center">
+        <div className="bg-[#f0efef] w-[350px] h-[400px] group relative flex justify-center">
           <img className="w-[200px]" src={img} alt={img} />
           <div className="absolute bottom-2 w-[90%] hidden group-hover:block">
             <button
               onClick={(event) => handleAddToCart(event, { img, name, price })}
-              className="cursor-pointer border-1 rounded-2xl  bg-green-300 text-white w-full py-1"
+              className="cursor-pointer border-1 rounded-2xl  bg-[#45c9a1] text-white w-full py-1"
             >
               Add to Cart
             </button>
@@ -35,7 +35,7 @@ function Market({ img, name, price, heart, cart = [], setCart }) {
             <p className="text-black-700 font-bold italic">
               {name}
             </p>
-            <p className="text-green-500">
+            <p className="text-[#45c9a1]">
              Ksh. {price .toLocaleString()}
             </p>
           </div>
