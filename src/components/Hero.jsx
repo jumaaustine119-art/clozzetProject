@@ -1,12 +1,13 @@
 import image from "../assets/images/hero-image.png";
 import { Search } from "lucide-react";
+import { Link } from "react-router-dom";
 function Hero() {
   return (
     <div className="container mx-auto">
       <div className="flex">
         <div className="w-[50%]">
           <h1 className="text-7xl font-semibold mt-7">
-            Choose the look that <span className="text-[#45c9a1]">suits</span>{" "}
+            Choose the look that <span className="text-[#45C9A1]">suits</span>{" "}
             you best
           </h1>
           <p className="text-xl font-normal my-7 ">
@@ -16,14 +17,18 @@ function Hero() {
             beautiful.True style never dies.
           </p>
           <div className="flex gap-7">
-            <button className="bg-[#45c9a1] rounded-full py-2 px-7 cursor-pointer">
-              Shop Now
-            </button>
-            <button className="bg-grey-500 text-[#45c9a1] rounded-full py-2 px-7 border-1 cursor-pointer ">
-              About Us
-            </button>
+            <Link to="/shop">
+              <button className="bg-[#45C9A1] rounded-full py-2 px-7 cursor-pointer">
+                Shop Now
+              </button>
+            </Link>
+            <Link to="/about us">
+              <button className=" text-[#45C9A1] rounded-full py-2 px-7 border-1 cursor-pointer ">
+                About Us
+              </button>
+            </Link>
           </div>
-          <div className="flex items-center rounded-full border-1 mt-3 mb-6">
+          <div className="flex items-center rounded-full border-1 mt-3">
             <Search />
             <input
               className="flex-1 border-0 rounded-full py-2 px-8 outline-0"
@@ -32,7 +37,7 @@ function Hero() {
             ></input>
           </div>
         </div>
-        <div className=" w-[50%] bg-[url(/src/assets/images/hero-image.png)] bg-contain bg-no-repeat bg-center">{image}</div>
+        <div className=" w-[50%] ml-4 bg-[url(/src/assets/images/hero-image.png)] bg-contain bg-no-repeat bg-center"></div>
       </div>
     </div>
   );

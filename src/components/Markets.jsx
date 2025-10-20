@@ -1,233 +1,121 @@
-import Market from "./Market"
-import { Search } from "lucide-react";
-import graphic from "../assets/images/graphic-tshirts.png"
-import heart from "../assets/images/heart.png"
-import bomber from "../assets/images/bomber.png"
-import pallazo from "../assets/images/pallazo.png"
-import shoes from "../assets/images/leather-shoes.png"
-import ragged from "../assets/images/ragged-jeans.png"
-import sweatshirts from "../assets/images/sweatshirts.png";
-import banquet from "../assets/images/slim-banquet-dress.png"
-import denim from "../assets/images/denim.png";
-import jacket from "../assets/images/leather-jacket.png";
-import quartz from "../assets/images/quartz-watch.png"
-import jeans from "../assets/images/denim-jeans.png"
-import brown from "../assets/images/brown-handbag.png"
-import cocktail from "../assets/images/cocktail.png"
-import shoulder from "../assets/images/Off-The-Shoulder.png"
-import serpenti from "../assets/images/serpenti-forever.png"
-import unisex from "../assets/images/unisex.png"
-import Airsense from "../assets/images/Airsense-pleated.png"
-import smartwatch from "../assets/images/smartwatch.png"
-import zooshi from "../assets/images/ZOOSHI-COBALT.png"
-import Knitted from "../assets/images/knitted-sweater.png"
+import React, { useState, useEffect } from 'react';
+import Market from "./Market"; 
+import { Search } from "lucide-react"; 
 
-function Markets({cart, setCart}){
-    return(
+// The 'heart' icon is likely still a local asset, so we'll keep it imported.
+// If your Django API returns the URL for the 'heart' icon, remove this line.
+import heart from "../assets/images/heart.png"; 
 
+function Markets({ cart, setCart }) {
+    // State to hold the products fetched from the backend
+    const [products, setProducts] = useState([]);
+    const [loading, setLoading] = useState(true); // State for loading indicator
+    const [error, setError] = useState(null); // State for error messages
+    const [searchTerm, setSearchTerm] = useState('');
+    
+    // Define the Django API endpoint URL
+    const PRODUCT_API_URL = 'http://127.0.0.1:8000/api/products/'; 
 
-    <div>
-      <div>
-        <div className=" container mx-auto flex items-center rounded-full border-2 mt-3 h-24 w-200">
-            
-            <div className="ml-6  ">
-            < Search />
+    // useEffect for API Call using fetch
+    useEffect(() => {
+        // Start loading
+        setLoading(true);
+        setError(null);
+
+        fetch(PRODUCT_API_URL, {
+            method: "GET",
+            headers: {
+                // Headers are generally optional for a simple GET request
+            },
+        })
+        .then((res) => {
+            // Check for HTTP errors (e.g., 404, 500)
+            if (!res.ok) {
+                // Throw an error to be caught in the .catch block
+                throw new Error(`Failed to fetch products: Status ${res.status}`);
+            }
+            return res.json();
+        })
+        .then((data) => {
+            console.log("Fetched Products:", data);
+            // Assuming 'data' is the array of product objects
+            setProducts(data);
+        })
+        .catch((err) => {
+            // Handle network errors or errors thrown above
+            console.error("Fetch Error:", err);
+            setError(err.message || "Could not connect to the product API.");
+        })
+        .finally(() => {
+            // Stop loading regardless of success or failure
+            setLoading(false);
+        });
+    }, []); // Runs only once when the component mounts
+
+    // Implement a filter for the search functionality
+    const filteredProducts = products.filter(product =>
+        product.name.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+
+    // Group products into rows of 4 for display
+    const rows = [];
+    for (let i = 0; i < filteredProducts.length; i += 4) {
+        rows.push(filteredProducts.slice(i, i + 4));
+    }
+
+    // --- Conditional Rendering ---
+    if (loading) {
+        return <div className="text-center mt-10 text-2xl">Loading products...</div>;
+    }
+
+    if (error) {
+        return <div className="text-center mt-10 text-red-600 text-2xl">Error: {error}</div>;
+    }
+
+    return (
+        <div className="markets-page">
+            {/* Search Bar */}
+            <div className="container mx-auto flex items-center rounded-full border-2 mt-3 h-24 w-200">
+                <div className="ml-6">
+                    <Search />
+                </div>
+                <input
+                    className="flex-1 border-0 py-1 px-4 outline-0 ml-4 text-2xl"
+                    type="text"
+                    placeholder="Search Products and categories"
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                />
             </div>
 
-            <input
-              className="flex-1 border-0  py-1 px-4 outline-0 ml-4 text-2xl"
-              type="text"
-              placeholder="search Products and caregories"
-            ></input>
-          </div>
-      </div>
-      <div className="flex container mx-auto justify-between mt-10">
-        <Market
-          img={ragged}
-          name="Blue Ragged Geans"
-          price= {2250}
-          heart={heart}
-          setCart={setCart}
-          cart={cart}
-        />
-
-        <Market 
-        img={sweatshirts} 
-        name="Brown Leather Jacket"
-        price= {2250}
-        heart={heart}
-        setCart={setCart}
-        cart={cart}
-        />
-
-        <Market 
-        img={banquet} 
-        name="Slim Banquet Dress" 
-        price= {10250} 
-        heart={heart}
-        setCart={setCart}
-        cart={cart}
-        />
-        <Market
-        img={denim} 
-        name="Blue Denim Jacket" 
-        price= {2250}
-        heart={heart}
-        setCart={setCart}
-        cart={cart}
-         />
-        
-      </div>
-      
-          <div className="flex container mx-auto justify-between pt-10">
-        <Market
-          img={jacket}
-          name="Broun Leather Jacket"
-          price= {3000}
-          heart={heart}
-          setCart={setCart}
-          cart={cart}
-        />
-
-        <Market 
-        img={quartz} 
-        name="Quartz Men's Watch"
-        price= {2400}
-        heart={heart}
-        setCart={setCart}
-        cart={cart}
-        />
-
-        <Market 
-        img={jeans} 
-        name="Women Denim Jeans" 
-        price= {2300}
-        heart={heart}
-        setCart={setCart}
-        cart={cart}
-        />
-        <Market
-        img={brown} 
-        name="Broun handbag" 
-        price= {2250}
-        heart={heart}
-        setCart={setCart}
-        cart={cart}
-         />
-      </div>
-
-      
-          <div className="flex container mx-auto justify-between pt-10">
-        <Market
-          img={graphic}
-          name="Unisex Graphic T-shirt"
-          price= {2100}
-          heart={heart}
-          setCart={setCart}
-          cart={cart}
-        />
-
-        <Market 
-        img={bomber} 
-        name="Black Bomber Jacket"
-        price= {2200}
-        heart={heart}
-        setCart={setCart}
-        cart={cart}
-        />
-
-        <Market 
-        img={pallazo} 
-        name="Pallazo Pallazo Pants" 
-        price= {2000} 
-        heart={heart}
-        setCart={setCart}
-        cart={cart}
-        />
-        <Market
-        img={ shoes} 
-        name="Pure Leather Shoes" 
-        price= {1250}
-        heart={heart}
-        setCart={setCart}
-        cart={cart}
-         />
-      </div>
-        <div className="flex container mx-auto justify-between pt-10">
-        <Market
-          img={serpenti}
-          name="Purple Serpenti Purse"
-          price= {2250}
-          heart={heart}
-          setCart={setCart}
-          cart={cart}
-        />
-
-        <Market 
-        img={unisex} 
-        name="Unisex Airforce Sneakers"
-        price= {2250}
-        heart={heart}
-        setCart={setCart}
-        cart={cart}
-        />
-
-        <Market 
-        img={cocktail} 
-        name="Blue Coctail Dress" 
-        price= {2500} 
-        heart={heart}
-        setCart={setCart}
-        cart={cart}
-        />
-        <Market
-        img={shoulder} 
-        name="Off-Shoulder Crop Top" 
-        price= {2300}
-        heart={heart}
-        setCart={setCart}
-        cart={cart}
-         />
-      </div>
-        <div className="flex container mx-auto justify-between pt-10">
-        <Market
-          img={Airsense}
-          name="AirsePleated Pants"
-          price= {2400}
-          heart={heart}
-          setCart={setCart}
-          cart={cart}
-        />
-
-        <Market 
-        img={smartwatch} 
-        name="Classy Smart Watch"
-        price={2250}
-        heart={heart}
-        setCart={setCart}
-        cart={cart}
-        />
-
-        <Market 
-        img={zooshi} 
-        name="Blue Platform Heals" 
-        price= {2500} 
-        heart={heart}
-        setCart={setCart}
-        cart={cart}
-        />
-        <Market
-        img={Knitted} 
-        name="Strip Knitted Sweater" 
-        price= {2250}
-        heart={heart}
-        setCart={setCart}
-        cart={cart}
-         />
-      </div>
-    </div>
-
-
-    )
+            {/* Dynamically Rendered Products */}
+            {rows.map((row, rowIndex) => (
+                <div key={rowIndex} className="flex container mx-auto justify-between pt-10">
+                    {row.map(product => (
+                        <Market
+                            key={product.id} 
+                            // CRUCIAL: Use product.image (the URL string from Django)
+                            img={product.image} 
+                            name={product.name}
+                            price={product.price}
+                            description={product.description}
+                            // Assuming 'heart' is the local asset for the icon
+                            heart={heart} 
+                            setCart={setCart}
+                            cart={cart}
+                        />
+                    ))}
+                </div>
+            ))}
+            
+            {/* Display message if no products are found after filtering */}
+            {filteredProducts.length === 0 && !loading && !error && (
+                <div className="text-center mt-10 text-xl text-gray-500">
+                    No products found matching "{searchTerm}"
+                </div>
+            )}
+        </div>
+    );
 }
-export default Markets
+
+export default Markets;

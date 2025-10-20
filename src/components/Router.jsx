@@ -11,6 +11,7 @@ import Admin from "../pages/Admin";
 import About from "../pages/About-Us";
 import Single from "./Single-pg";
 
+
 function Router() {
   const [cart, setCart] = useState(() => {
     const savedCart = localStorage.getItem("cart");
@@ -19,6 +20,8 @@ function Router() {
   useEffect(() => {
     localStorage.setItem("cart", JSON.stringify(cart));
   }, [cart]);
+
+
 
   return (
     <BrowserRouter>
@@ -95,6 +98,8 @@ function Router() {
             </Layout>
           }
         />
+       
+
       </Routes>
     </BrowserRouter>
   );
