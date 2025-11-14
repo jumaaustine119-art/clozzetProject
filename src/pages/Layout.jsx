@@ -1,7 +1,6 @@
 import Nav from "../components/Nav"
-// import logo from "../assets/images/logo.svg"
+
 import Footer from "../components/Footer"
-// import { LibrarySquareIcon } from "lucide-react";
 
 function Layout ({children, cart}){
     return(

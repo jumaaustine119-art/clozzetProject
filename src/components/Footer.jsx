@@ -67,7 +67,7 @@ function Footer() {
           </div>
           <div className="flex py-4 gap-1">
             <img className="w-[30px]" src={contact} alt={contact} />
-            <p>254-700-333-333</p>
+            <p>254-797-896-227</p>
           </div>
           <p className="pt-2">Follow Us</p>
           <div className="flex pt-3 gap-2">

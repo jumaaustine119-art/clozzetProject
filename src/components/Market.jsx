@@ -1,7 +1,7 @@
 import graphic from "../assets/images/graphic-tshirts.png"
 import heart from "../assets/images/heart.png"
 
-function Market({ img, name, price, heart, cart = [], setCart }) {
+function Market({ image, name, price, heart, cart = [], setCart }) {
   function handleSetCart(product) {
     
     if (!cart.find(item => item.name === product.name)) {
@@ -19,10 +19,10 @@ function Market({ img, name, price, heart, cart = [], setCart }) {
     <div>
       <div>
         <div className="bg-[#f0efef] w-[350px] h-[400px] group relative flex justify-center">
-          <img className="w-[200px]" src={img} alt={img} />
+          <img className="w-[200px]" src={`http://127.0.0.1:8000/api${image}`} alt={image} />
           <div className="absolute bottom-2 w-[90%] hidden group-hover:block">
             <button
-              onClick={(event) => handleAddToCart(event, { img, name, price })}
+              onClick={(event) => handleAddToCart(event, { image, name, price })}
               className="cursor-pointer border-1 rounded-2xl  bg-[#45c9a1] text-white w-full py-1"
             >
               Add to Cart
